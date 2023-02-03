@@ -1,0 +1,10 @@
+.main-bg{
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+}
+
+.glass-bg{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255,255,255, 0.3),  rgba(255,255,255, 0.6));
+}
+
+
