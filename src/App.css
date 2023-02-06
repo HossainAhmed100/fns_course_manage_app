@@ -1,3 +1,9 @@
+:root {
+    --main--blue: #69ddda;
+    --white: #ffffff;
+  }
+
+
 .main-bg{
     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
 }
@@ -6,5 +12,14 @@
     background: white;
     background: linear-gradient(to right bottom, rgba(255,255,255, 0.3),  rgba(255,255,255, 0.6));
 }
+
+.active{
+    background: var(--main--blue);
+    color: white;
+}
+a:active{
+    background: var(--main--blue);
+}
+
 
 

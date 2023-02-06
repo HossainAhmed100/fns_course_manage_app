@@ -1,12 +1,49 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
+import PPhoto from "../Utility/img/profile.png";
+import { RxDashboard } from "react-icons/rx";
+import {
+  RiSettingsFill,
+  RiSecurePaymentLine,
+  RiSearch2Line,
+  RiDownloadCloudFill,
+} from "react-icons/ri";
+import { toast } from "react-toastify";
 import NavBar from "../Components/NavBar/NavBar";
+import UserSideBar from "../Components/NavBar/UserSideBar";
 
 function Main() {
+  const copyTxetId = (id) => {
+    navigator.clipboard.writeText(id);
+    toast.success("Copy Successfull");
+  };
+
   return (
     <div>
       <NavBar />
-      <Outlet />
+      <div className="drawer drawer-mobile">
+        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content flex flex-col items-center justify-center">
+          <Outlet />
+          <label
+            htmlFor="my-drawer-2"
+            className="btn btn-primary drawer-button lg:hidden"
+          >
+            Open drawer
+          </label>
+        </div>
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+            <li>
+              <a href="/">Sidebar Item 1</a>
+            </li>
+            <li>
+              <a href="/">Sidebar Item 2</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
