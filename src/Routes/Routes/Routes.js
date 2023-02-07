@@ -5,7 +5,7 @@ import UserFirst from "../../Layout/UserFirst";
 import Signup from "../../Pages/Signup";
 import Login from "../../Pages/Login";
 import DashBoard from "../../Pages/User/DashBoard";
-import UserOfflineClass from "../../Pages/User/UserOfflineClass";
+import RecordedClass from "../../Pages/User/RecordedClass";
 import UserPayment from "../../Pages/User/UserPayment";
 import Home from "../../Pages/Home";
 import Faq from "../../Pages/Faq";
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
         element: <DashBoard />,
       },
       {
-        path: "userofflineclass",
-        element: <UserOfflineClass />,
+        path: "/user/recordedclass",
+        element: <RecordedClass />,
       },
       {
         path: "userpaymemt",

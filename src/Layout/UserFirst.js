@@ -1,24 +1,54 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
-import { BsLayoutSidebarInset } from "react-icons/bs";
+import {
+  RiSettings4Fill,
+  RiFeedbackFill,
+  RiDownloadCloudLine,
+} from "react-icons/ri";
+import { BsLayoutSidebarInset, BsCreditCardFill } from "react-icons/bs";
 
 function UserFirst() {
   return (
     <div>
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content bg-white">
           <Outlet />
         </div>
-        <div className="drawer-side border-2">
+        <div className="drawer-side border-r-2">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+
+          <ul className="menu p-4 w-80 space-y-3 bg-base-100 text-base-content">
             <li>
-              <a href="/">Sidebar Item 1</a>
+              <NavLink to="/user">
+                <RxDashboard size={16} />
+                Dasboard
+              </NavLink>
             </li>
             <li>
-              <a href="/">Sidebar Item 2</a>
+              <Link to="/user/recordedclass">
+                <RiDownloadCloudLine size={16} />
+                Recorded Class
+              </Link>
+            </li>
+            <li>
+              <Link to="/user">
+                <BsCreditCardFill size={16} />
+                Payment
+              </Link>
+            </li>
+            <li>
+              <Link to="/user">
+                <RiSettings4Fill size={16} />
+                Account Setting
+              </Link>
+            </li>
+            <li>
+              <Link to="/user">
+                <RiFeedbackFill size={16} />
+                Feedback
+              </Link>
             </li>
           </ul>
         </div>

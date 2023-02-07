@@ -16,7 +16,7 @@ function Signup() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const displayName = data.username;
+    // const displayName = data.username;
     const email = data.email;
     const password = data.password;
     createUser(email, password)

@@ -1,5 +1,5 @@
 :root {
-    --main--blue: #69ddda;
+    --main--blue: #570df8;
     --white: #ffffff;
   }
 
@@ -21,5 +21,12 @@ a:active{
     background: var(--main--blue);
 }
 
+.custom-shadow{
+    box-shadow: 0 0 20px 0px #eef2ff;
+}
+
+.custom-border{
+    border: 1px solid #eef2ff;
+}
 
 

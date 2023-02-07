@@ -1,7 +1,7 @@
 import React from "react";
 
-function UserOfflineClass() {
+function RecordedClass() {
   return <div>UserOfflineClass</div>;
 }
 
-export default UserOfflineClass;
+export default RecordedClass;
