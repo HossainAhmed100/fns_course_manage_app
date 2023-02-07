@@ -1,26 +1,24 @@
 import React, { useContext } from "react";
-import primg from "../../Utility/img/profile.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import LodingAnimation from "../LodingAnimation";
-function NavBar() {
-  const { user, loding } = useContext(AuthContext);
+import primg from "../../Utility/img/profile.png";
+
+function UserNavBar() {
+  const { loding } = useContext(AuthContext);
   if (loding) {
     return <LodingAnimation />;
   }
   return (
-    <div className="bg-base-100 z-50 shadow fixed w-full">
-      <div className="navbar container mx-auto bg-base-100">
-        <div className="navbar-start">
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            FNS Course
-          </Link>
-        </div>
-        {user ? (
-          <div className="navbar-end">
-            <Link to="/user" className="btn btn-primary mr-2">
-              Dashboard
+    <div>
+      <div className="bg-base-100 z-50 shadow w-full">
+        <div className="navbar container mx-auto bg-base-100">
+          <div className="navbar-start">
+            <Link to="/" className="btn btn-ghost normal-case text-xl">
+              FNS Course
             </Link>
+          </div>
+          <div className="navbar-end">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 ring rounded-full">
@@ -46,23 +44,10 @@ function NavBar() {
               </ul>
             </div>
           </div>
-        ) : (
-          <div className="navbar-end">
-            <button>
-              <Link className="btn btn-primary mr-2" to="/login">
-                Login
-              </Link>
-            </button>
-            <button>
-              <Link className="btn btn-primary" to="/signup">
-                Signup
-              </Link>
-            </button>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
 }
 
-export default NavBar;
+export default UserNavBar;

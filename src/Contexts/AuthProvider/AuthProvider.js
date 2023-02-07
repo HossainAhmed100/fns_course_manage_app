@@ -6,7 +6,8 @@ import {
 } from "firebase/auth";
 import app from "../../firebase.init";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
+
 const auth = getAuth(app);
 
 function AuthProvider({ children }) {
@@ -20,12 +21,10 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
+      setLoding(false);
     });
-    return () => {
-      return unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   const authInfo = {

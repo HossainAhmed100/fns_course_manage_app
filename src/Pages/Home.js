@@ -4,13 +4,14 @@ import thumbnail from "../Utility/img/course.jpg";
 
 function Home() {
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div className="bg-gray-50 min-h-screen p-20">
       <div className="container mx-auto">
-        <h1 className="text-xl text-center m-6 lg:text-3xl font-semibold">
+        <h1 className="text-xl text-center m-6 lg:text-5xl font-semibold">
           All Course
         </h1>
-        <div className="grid grid-cols-4 gap-16">
-          <div className="card w-96 bg-white shadow-md">
+        <div className="divider"></div>
+        <div className="grid lg:grid-cols-2 xl:grid-cols-4 md:grid-cols-1 gap-10">
+          <div className=" card max-w-xs m-auto bg-white shadow-md">
             <figure>
               <img src={thumbnail} alt="Shoes" />
             </figure>
@@ -27,12 +28,12 @@ function Home() {
               <span>Assigntment : 16</span>
               <span>{"40"}+ Enrolled Alredy</span>
               <div className="card-actions flex-row mt-4 items-center justify-around">
-                <button className="btn btn-primary w-36">See Details</button>
-                <button className="btn btn-primary w-36">Enroll Now</button>
+                <button className="btn btn-primary ">See Details</button>
+                <button className="btn btn-primary ">Enroll Now</button>
               </div>
             </div>
           </div>
-          <div className="card w-96 bg-white shadow-md">
+          <div className=" card max-w-xs m-auto bg-white shadow-md">
             <figure>
               <img src={thumbnail} alt="Shoes" />
             </figure>
@@ -49,12 +50,12 @@ function Home() {
               <span>Assigntment : 16</span>
               <span>{"40"}+ Enrolled Alredy</span>
               <div className="card-actions flex-row mt-4 items-center justify-around">
-                <button className="btn btn-primary w-36">See Details</button>
-                <button className="btn btn-primary w-36">Enroll Now</button>
+                <button className="btn btn-primary ">See Details</button>
+                <button className="btn btn-primary ">Enroll Now</button>
               </div>
             </div>
           </div>
-          <div className="card w-96 bg-white shadow-md">
+          <div className=" card max-w-xs m-auto bg-white shadow-md">
             <figure>
               <img src={thumbnail} alt="Shoes" />
             </figure>
@@ -71,12 +72,12 @@ function Home() {
               <span>Assigntment : 16</span>
               <span>{"40"}+ Enrolled Alredy</span>
               <div className="card-actions flex-row mt-4 items-center justify-around">
-                <button className="btn btn-primary w-36">See Details</button>
-                <button className="btn btn-primary w-36">Enroll Now</button>
+                <button className="btn btn-primary ">See Details</button>
+                <button className="btn btn-primary ">Enroll Now</button>
               </div>
             </div>
           </div>
-          <div className="card w-96 bg-white shadow-md">
+          <div className=" card max-w-xs m-auto bg-white shadow-md">
             <figure>
               <img src={thumbnail} alt="Shoes" />
             </figure>
@@ -93,8 +94,8 @@ function Home() {
               <span>Assigntment : 16</span>
               <span>{"40"}+ Enrolled Alredy</span>
               <div className="card-actions flex-row mt-4 items-center justify-around">
-                <button className="btn btn-primary w-36">See Details</button>
-                <button className="btn btn-primary w-36">Enroll Now</button>
+                <button className="btn btn-primary ">See Details</button>
+                <button className="btn btn-primary ">Enroll Now</button>
               </div>
             </div>
           </div>

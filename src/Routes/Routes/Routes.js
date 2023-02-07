@@ -8,6 +8,7 @@ import DashBoard from "../../Pages/User/DashBoard";
 import UserOfflineClass from "../../Pages/User/UserOfflineClass";
 import UserPayment from "../../Pages/User/UserPayment";
 import Home from "../../Pages/Home";
+import Faq from "../../Pages/Faq";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <Signup />,
       },
+      {
+        path: "/faq",
+        element: <Faq />,
+      },
     ],
   },
   {
@@ -33,7 +38,7 @@ const router = createBrowserRouter([
     element: <UserFirst />,
     children: [
       {
-        path: "dashboard",
+        path: "/user",
         element: <DashBoard />,
       },
       {
