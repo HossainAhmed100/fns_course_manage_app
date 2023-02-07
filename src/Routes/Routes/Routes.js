@@ -7,6 +7,7 @@ import Login from "../../Pages/Login";
 import DashBoard from "../../Pages/User/DashBoard";
 import UserOfflineClass from "../../Pages/User/UserOfflineClass";
 import UserPayment from "../../Pages/User/UserPayment";
+import Home from "../../Pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -15,29 +16,33 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <DashBoard />,
+        element: <Home />,
       },
       {
-        path: "/userofflineclass",
-        element: <UserOfflineClass />,
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: "/userpaymemt",
-        element: <UserPayment />,
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },
   {
-    path: "/userfirst",
+    path: "/user",
     element: <UserFirst />,
     children: [
       {
-        path: "login",
-        element: <Login />,
+        path: "dashboard",
+        element: <DashBoard />,
       },
       {
-        path: "signup",
-        element: <Signup />,
+        path: "userofflineclass",
+        element: <UserOfflineClass />,
+      },
+      {
+        path: "userpaymemt",
+        element: <UserPayment />,
       },
     ],
   },

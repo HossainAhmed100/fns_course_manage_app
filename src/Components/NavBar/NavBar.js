@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <div className="bg-base-100 shadow fixed w-full">
-      <div className="navbar bg-base-100">
+    <div className="bg-base-100 z-50 shadow fixed w-full">
+      <div className="navbar container mx-auto bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -64,7 +63,10 @@ function NavBar() {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img
+                  src="/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  alt=""
+                />
               </div>
             </label>
             <ul
@@ -72,16 +74,16 @@ function NavBar() {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
+                <a href="/" className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </a>
               </li>
               <li>
-                <a>Settings</a>
+                <a href="/">Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a href="/">Logout</a>
               </li>
             </ul>
           </div>
