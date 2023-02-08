@@ -18,7 +18,7 @@ function NavBar() {
         </div>
         {user ? (
           <div className="navbar-end">
-            <Link to="/user" className="btn btn-primary mr-2">
+            <Link to="/user/dashboard" className="btn btn-primary mr-2">
               Dashboard
             </Link>
             <div className="dropdown dropdown-end">

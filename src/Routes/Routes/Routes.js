@@ -11,6 +11,7 @@ import Home from "../../Pages/Home";
 import Faq from "../../Pages/Faq";
 import UserProfile from "../../Pages/User/UserProfile";
 import UserFeedback from "../../Pages/User/UserFeedback";
+import UserCourse from "../../Pages/User/UserCourse";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
     element: <UserFirst />,
     children: [
       {
+        path: "/user",
+        element: <DashBoard />,
+      },
+      {
         path: "/user/dashboard",
         element: <DashBoard />,
       },
@@ -58,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/user/userfeedback",
         element: <UserFeedback />,
+      },
+      {
+        path: "/user/usercourse",
+        element: <UserCourse />,
       },
     ],
   },

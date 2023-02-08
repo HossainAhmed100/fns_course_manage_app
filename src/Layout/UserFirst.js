@@ -6,6 +6,7 @@ import {
   RiFeedbackFill,
   RiDownloadCloudLine,
 } from "react-icons/ri";
+import { SiGoogleclassroom } from "react-icons/si";
 import { BsLayoutSidebarInset, BsCreditCardFill } from "react-icons/bs";
 
 function UserFirst() {
@@ -42,6 +43,12 @@ function UserFirst() {
               <NavLink to="/user/userprofile">
                 <RiSettings4Fill size={16} />
                 Account Setting
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/user/usercourse">
+                <SiGoogleclassroom size={16} />
+                All Course
               </NavLink>
             </li>
             <li>
