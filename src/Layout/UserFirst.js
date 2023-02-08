@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import {
   RiSettings4Fill,
@@ -21,34 +21,34 @@ function UserFirst() {
 
           <ul className="menu p-4 w-80 space-y-3 bg-base-100 text-base-content">
             <li>
-              <NavLink to="/user">
+              <NavLink to="/user/dashboard">
                 <RxDashboard size={16} />
                 Dasboard
               </NavLink>
             </li>
             <li>
-              <Link to="/user/recordedclass">
+              <NavLink to="/user/recordedclass">
                 <RiDownloadCloudLine size={16} />
                 Recorded Class
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/user">
+              <NavLink to="/user/userpaymemt">
                 <BsCreditCardFill size={16} />
                 Payment
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/user">
+              <NavLink to="/user/userprofile">
                 <RiSettings4Fill size={16} />
                 Account Setting
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/user">
+              <NavLink to="/user/userfeedback">
                 <RiFeedbackFill size={16} />
                 Feedback
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

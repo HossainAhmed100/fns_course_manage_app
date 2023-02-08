@@ -9,6 +9,8 @@ import RecordedClass from "../../Pages/User/RecordedClass";
 import UserPayment from "../../Pages/User/UserPayment";
 import Home from "../../Pages/Home";
 import Faq from "../../Pages/Faq";
+import UserProfile from "../../Pages/User/UserProfile";
+import UserFeedback from "../../Pages/User/UserFeedback";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
     element: <UserFirst />,
     children: [
       {
-        path: "/user",
+        path: "/user/dashboard",
         element: <DashBoard />,
       },
       {
@@ -46,8 +48,16 @@ const router = createBrowserRouter([
         element: <RecordedClass />,
       },
       {
-        path: "userpaymemt",
+        path: "/user/userpaymemt",
         element: <UserPayment />,
+      },
+      {
+        path: "/user/userprofile",
+        element: <UserProfile />,
+      },
+      {
+        path: "/user/userfeedback",
+        element: <UserFeedback />,
       },
     ],
   },
