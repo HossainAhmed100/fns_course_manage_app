@@ -3,6 +3,7 @@ import { HiOutlineCreditCard } from "react-icons/hi";
 import { RiAccountPinBoxLine } from "react-icons/ri";
 import { SiGoogleclassroom } from "react-icons/si";
 import { BiVideoRecording } from "react-icons/bi";
+import { AiFillNotification } from "react-icons/ai";
 import { MdOutlineAssignment } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 import profileimg from "../../Utility/img/profile.png";
@@ -51,6 +52,11 @@ function DashBoard() {
               <MdOutlineAssignment size={35} />
               <p className="text-xl mt-1 font-bold text-gray-800">1</p>
               <span>Avilable Assignment</span>
+            </div>
+            <div className="bg-white p-4 rounded-3xl custom-border custom-shadow">
+              <AiFillNotification size={35} />
+              <p className="text-xl mt-1 font-bold text-gray-800">21</p>
+              <span>Notice</span>
             </div>
           </div>
           <div className="flex w-full rounded-3xl h-80 leading-8 custom-border custom-shadow flex-col bg-white items-center justify-center">

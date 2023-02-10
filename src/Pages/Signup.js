@@ -7,21 +7,113 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
+import axios from "../axios";
 function Signup() {
   const [viewPass, setViewPass] = useState(true);
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserinfo } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    // const displayName = data.username;
+    const name = data.username;
     const email = data.email;
+    const rule = "User";
+    const age = 18;
+    const accountstatus = true;
+    const id = "1613212";
+    const phone = 8801850563626;
+    const assignment = [
+      {
+        course: "63e51bd5d4935e47f3bd",
+        mark: false,
+        document: ["0"],
+        status: false,
+      },
+      {
+        course: "63e51bd5d4935e47f3bd",
+        mark: 90,
+        document: ["gihub.com"],
+        status: true,
+      },
+    ];
+    const address = "Dhaka, Bangladesh";
     const password = data.password;
+    const course = ["63e51bd5d4935e47f3bd", "63e51bd5d4935e47f3gb"];
+    const userClass = [
+      { course: "63e51bd5d4935e47f3bd", totalClass: 20, atendClass: 18 },
+      { course: "63e51bd5d4935e47f3bd", totalClass: 20, atendClass: 18 },
+    ];
+    const payment = [
+      {
+        course: "63e51bd5d4935e47f3bd",
+        trnxid: "B4S6F5B1231DFB65RE44",
+        paymethod: "Bikash",
+        amount: 1000,
+        status: "Pending",
+      },
+      {
+        course: "63e51bd5d4935e47f3bd",
+        trnxid: "B4S6F5B1231DFB65RE55",
+        paymethod: "Rocket",
+        amount: 3000,
+        status: "Wrong",
+      },
+      {
+        course: "63e51bd5d4935e47f3bd",
+        trnxid: "B4S6F5B1231DFB65RE66",
+        paymethod: "Bank",
+        amount: 2000,
+        status: "Approve",
+      },
+    ];
+    const feedback = [
+      {
+        date: "11/02/2023",
+        message:
+          "e nemo temporibus, numquam beatae, eaque dolor dolorum blanditiis perferendis sunt distinctio, nobis molestias sequi illum? Quod iure dolor cum veniam labore, necessitatibus quasi mollitia saepe cumque, officiis, laboriosam aut! Nisi corrupti magnam, obcaecati optio ad harum unde magni laboriosam veritatis nobis, quaerat expedita ipsa hic repellendus praesentium dolorem, cumque qui similique mollitia. Quod neque nam eaque quae nobis ab odio.",
+      },
+      {
+        date: "12/02/2023",
+        message:
+          "e nemo temporibus, numquam beatae, eaque dolor dolorum blanditiis perferendis sunt distinctio, nobis molestias sequi illum? Quod iure dolor cum veniam labore, necessitatibus quasi mollitia saepe cumque, officiis, laboriosam aut! Nisi corrupti magnam, obcaecati optio ad harum unde magni laboriosam veritatis nobis, quaerat expedita ipsa hic repellendus praesentium dolorem, cumque qui similique mollitia. Quod neque nam eaque quae nobis ab odio.",
+      },
+      {
+        date: "13/02/2023",
+        message:
+          "e nemo temporibus, numquam beatae, eaque dolor dolorum blanditiis perferendis sunt distinctio, nobis molestias sequi illum? Quod iure dolor cum veniam labore, necessitatibus quasi mollitia saepe cumque, officiis, laboriosam aut! Nisi corrupti magnam, obcaecati optio ad harum unde magni laboriosam veritatis nobis, quaerat expedita ipsa hic repellendus praesentium dolorem, cumque qui similique mollitia. Quod neque nam eaque quae nobis ab odio.",
+      },
+    ];
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        if (user) {
+          updateUserinfo(email).then(async () => {
+            await axios
+              .post("alluser", {
+                email,
+                name,
+                rule,
+                userClass,
+                id,
+                accountstatus,
+                age,
+                phone,
+                address,
+                course,
+                assignment,
+                payment,
+                feedback,
+              })
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch((error) => {
+                console.log("Signup", error);
+              });
+          });
+        }
         console.log("Signup", user);
       })
       .catch((error) => {

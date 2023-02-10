@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineGoogle,
   AiFillEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
+import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
 function Login() {
   const [viewPass, setViewPass] = useState(false);
+  const { userLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    // data.preventDefault();
+    const email = data.email;
+    const password = data.password;
+    userLogin(email, password).then((userCredential) => {
+      const user = userCredential.user;
+      if (user) {
+        navigate("/user/dashboard");
+      }
+    });
     console.log(data);
   };
 

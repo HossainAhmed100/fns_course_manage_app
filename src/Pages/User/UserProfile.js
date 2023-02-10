@@ -3,17 +3,22 @@ import prf from "../../Utility/img/profile.png";
 import { FiEdit3 } from "react-icons/fi";
 import { VscCopy } from "react-icons/vsc";
 import { IoMdCloudUpload } from "react-icons/io";
+import { IoLogOut } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
-  const { updateUserinfo, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { updateUserinfo, user, userSignOut } = useContext(AuthContext);
   const [editForm, setEditForm] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  //New User Registration
   const onSubmit = (data) => {
     console.log(user);
     const name = data.name;
@@ -23,6 +28,15 @@ function UserProfile() {
     updateUserinfo(name, phone, age, address);
     console.log(data);
   };
+
+  //User Logout
+  const userLogOutHandle = async () => {
+    const logoutSuccess = await userSignOut();
+    if (logoutSuccess) {
+      navigate("http://localhost:3000/login");
+    }
+  };
+
   return (
     <div className="p-10 grid lg:grid-cols-3 gap-5">
       <div className="max-w-md">
@@ -67,16 +81,21 @@ function UserProfile() {
                 {"Dhaka, bangladesh"}
               </span>
             </h1>
-            <h1>
-              {!editForm && (
-                <button
-                  onClick={() => setEditForm(!editForm)}
-                  className="btn btn-primary mt-4 w-full"
-                >
-                  <FiEdit3 size={18} className="mr-2" />
-                  Edit Profile
-                </button>
-              )}
+            <h1 className="flex flex-row items-center gap-4 justify-between">
+              <button
+                onClick={() => userLogOutHandle()}
+                className="btn btn-error mt-4 w-44"
+              >
+                <IoLogOut size={18} className="mr-2 rotate-180" />
+                Log out
+              </button>
+              <button
+                onClick={() => setEditForm(!editForm)}
+                className="btn btn-primary mt-4 w-44"
+              >
+                <FiEdit3 size={18} className="mr-2" />
+                Edit
+              </button>
             </h1>
           </div>
         </div>
