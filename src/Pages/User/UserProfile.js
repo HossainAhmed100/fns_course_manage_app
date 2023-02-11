@@ -7,6 +7,8 @@ import { IoLogOut } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -26,15 +28,27 @@ function UserProfile() {
     const age = data.age;
     const address = data.address;
     updateUserinfo(name, phone, age, address);
-    console.log(data);
   };
 
   //User Logout
   const userLogOutHandle = async () => {
-    const logoutSuccess = await userSignOut();
-    if (logoutSuccess) {
-      navigate("http://localhost:3000/login");
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be Log Out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const success = userSignOut();
+        if (success) {
+          toast.success("Log Out Successfully");
+          navigate("/login");
+        }
+      }
+    });
   };
 
   return (
@@ -72,7 +86,7 @@ function UserProfile() {
             <h1>
               Email :{" "}
               <span className="text-xl font-semibold">
-                {"hossain@gmail.com"}
+                {user?.email && user?.email}
               </span>
             </h1>
             <h1>

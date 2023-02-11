@@ -7,9 +7,11 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
 function Login() {
   const [viewPass, setViewPass] = useState(false);
   const { userLogin } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -19,13 +21,22 @@ function Login() {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    userLogin(email, password).then((userCredential) => {
-      const user = userCredential.user;
-      if (user) {
-        navigate("/user/dashboard");
-      }
-    });
-    console.log(data);
+    userLogin(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          navigate("/user/dashboard");
+          toast.success("Login Succeeded!");
+        }
+      })
+      .catch((error) => {
+        const erms = error.code;
+        if (erms === "auth/user-not-found") {
+          setLoginError("User Not Found");
+        } else if (erms === "auth/wrong-password") {
+          setLoginError("Your Password is Wrong!");
+        }
+      });
   };
 
   return (
@@ -37,6 +48,7 @@ function Login() {
               <h3 className="font-semibold text-2xl text-gray-800">Log in </h3>
               <p className="text-gray-500">Please sign in to your account.</p>
             </div>
+            <p className="text-red-500">{loginError && loginError}</p>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 tracking-wide">

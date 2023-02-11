@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineGoogle,
   AiFillEye,
@@ -8,8 +8,11 @@ import {
 } from "react-icons/ai";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
 import axios from "../axios";
+import { toast } from "react-toastify";
 function Signup() {
   const [viewPass, setViewPass] = useState(true);
+  const [signUpError, setSignUpError] = useState("");
+  const navigate = useNavigate();
   const { createUser, updateUserinfo } = useContext(AuthContext);
   const {
     register,
@@ -89,7 +92,7 @@ function Signup() {
       .then((result) => {
         const user = result.user;
         if (user) {
-          updateUserinfo(email).then(async () => {
+          updateUserinfo(name).then(async () => {
             await axios
               .post("alluser", {
                 email,
@@ -107,7 +110,10 @@ function Signup() {
                 feedback,
               })
               .then((res) => {
-                console.log(res.data);
+                if (res.data.acknowledged) {
+                  toast.success("Signup Succeeded");
+                  navigate("/user/userprofile");
+                }
               })
               .catch((error) => {
                 console.log("Signup", error);
@@ -117,7 +123,11 @@ function Signup() {
         console.log("Signup", user);
       })
       .catch((error) => {
-        console.log(error);
+        const errorms = error.code;
+        if (errorms === "auth/email-already-in-use") {
+          setSignUpError("This Email already in use");
+        }
+        console.log(errorms);
       });
   };
 
@@ -130,6 +140,7 @@ function Signup() {
               <h3 className="font-semibold text-2xl text-gray-800">Sign Up </h3>
               <p className="text-gray-500">Please sign in to your account.</p>
             </div>
+            <p className="text-red-500">{signUpError && signUpError}</p>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-1">
                 <label className="text-sm font-medium text-gray-700 tracking-wide">

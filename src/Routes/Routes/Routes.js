@@ -1,17 +1,24 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../../Layout/Main";
-import UserFirst from "../../Layout/UserFirst";
-import Signup from "../../Pages/Signup";
-import Login from "../../Pages/Login";
-import DashBoard from "../../Pages/User/DashBoard";
-import RecordedClass from "../../Pages/User/RecordedClass";
-import UserPayment from "../../Pages/User/UserPayment";
-import Home from "../../Pages/Home";
 import Faq from "../../Pages/Faq";
-import UserProfile from "../../Pages/User/UserProfile";
-import UserFeedback from "../../Pages/User/UserFeedback";
+import Home from "../../Pages/Home";
+import Main from "../../Layout/Main";
+import Login from "../../Pages/Login";
+import Signup from "../../Pages/Signup";
+import UserFirst from "../../Layout/UserFirst";
+import APayment from "../../Pages/Admin/APayment";
+import DashBoard from "../../Pages/User/DashBoard";
+import AdminLayout from "../../Layout/AdminLayout";
 import UserCourse from "../../Pages/User/UserCourse";
+import ADashboard from "../../Pages/Admin/ADashboard";
+import UserProfile from "../../Pages/User/UserProfile";
+import UserPayment from "../../Pages/User/UserPayment";
+import UserFeedback from "../../Pages/User/UserFeedback";
+import AUserControl from "../../Pages/Admin/AUserControl";
+import ARecordClass from "../../Pages/Admin/ARecordClass";
+import RecordedClass from "../../Pages/User/RecordedClass";
+import AUserFeedback from "../../Pages/Admin/AUserFeedback";
+import ATaskandAssignment from "../../Pages/Admin/ATaskandAssignment";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +74,40 @@ const router = createBrowserRouter([
       {
         path: "/user/usercourse",
         element: <UserCourse />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "/admin",
+        element: <ADashboard />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: <DashBoard />,
+      },
+      {
+        path: "/admin/recordclass",
+        element: <ARecordClass />,
+      },
+      {
+        path: "/admin/adminpayment",
+        element: <APayment />,
+      },
+      {
+        path: "/admin/usercontrol",
+        element: <AUserControl />,
+      },
+      {
+        path: "/admin/userfeedback",
+        element: <AUserFeedback />,
+      },
+      {
+        path: "/admin/taskandasigntment",
+        element: <ATaskandAssignment />,
       },
     ],
   },

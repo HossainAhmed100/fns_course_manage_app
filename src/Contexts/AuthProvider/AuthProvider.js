@@ -19,8 +19,8 @@ function AuthProvider({ children }) {
   const [loding, setLoding] = useState(true);
 
   // Create A New User
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser = async (email, password) => {
+    return await createUserWithEmailAndPassword(auth, email, password);
   };
 
   //Login User
@@ -30,38 +30,14 @@ function AuthProvider({ children }) {
 
   // User LogOut
   const userSignOut = async () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be Log Out!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const success = signOut();
-        if (success) {
-          Swal.fire("Log Out!", "Log Out Successfully", "success");
-        }
-      }
-    });
+    return await signOut();
   };
 
   // Update User Account Info
   const updateUserinfo = async (name) => {
-    await updateProfile(auth.currentUser, {
-      displayName: name,
-    })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    await updateProfile(auth.currentUser, { displayName: name });
   };
 
-  //User Obserbe
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

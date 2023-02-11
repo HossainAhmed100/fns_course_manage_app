@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function UserPayment() {
+function ARecordClass() {
   const {
     register,
     formState: { errors },
@@ -38,48 +38,44 @@ function UserPayment() {
               )}
             </div>
             <div className="flex flex-col w-full">
-              <label>TRNX ID</label>
+              <label>Dowwnlaod Link</label>
               <input
                 {...register("trnxid", { required: true })}
                 type="text"
-                placeholder="Type Your Transction id"
+                placeholder="Enter Video Downlaod Link"
                 className="input input-bordered w-full max-md"
               />
               {errors.trnxid?.type === "required" && (
                 <p role="alert" className="text-red-500">
-                  Plz Type Your Transction ID
+                  Plz Type Video Downlaod Link
                 </p>
               )}
             </div>
             <div className="flex flex-col w-full">
-              <label>Amount</label>
+              <label>Video File Size</label>
               <input
                 {...register("amount", { required: true })}
-                type="text"
-                placeholder="Type Your Transction id"
+                type="number"
+                placeholder="Enter Video File Size"
                 className="input input-bordered w-full max-w-md"
               />
               {errors.trnxid?.type === "required" && (
                 <p role="alert" className="text-red-500">
-                  Type Your Pay Amount
+                  Type Your Video File Size
                 </p>
               )}
             </div>
             <div className="flex flex-col w-full">
-              <label>Payment Method</label>
-              <select
-                {...register("paymentmethod", { required: true })}
-                className="select select-bordered w-full max-w-md"
-              >
-                <option disabled selected>
-                  Select Payment Method
-                </option>
-                <option value={"Bikash"}>Bkiash</option>
-                <option value={"Nagat"}>Nagat</option>
-              </select>
-              {errors.paymentmethod?.type === "required" && (
+              <label>Video Duration</label>
+              <input
+                {...register("amount", { required: true })}
+                type="text"
+                placeholder="Enter Video Duration"
+                className="input input-bordered w-full max-w-md"
+              />
+              {errors.trnxid?.type === "required" && (
                 <p role="alert" className="text-red-500">
-                  Plz Select a Payment method
+                  Type Your Video Duration
                 </p>
               )}
             </div>
@@ -97,23 +93,25 @@ function UserPayment() {
                 <tr>
                   <th></th>
                   <th>Course</th>
-                  <th>TRNX ID</th>
-                  <th>Amount</th>
-                  <th>Payment Method</th>
-                  <th>Status</th>
+                  <th>Downlaod Link</th>
+                  <th>Video Duration</th>
+                  <th>File Size</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th>1</th>
                   <td>Complete Web Development with React.js</td>
-                  <td>B4S6F5B1231DFB65RE44</td>
-                  <td>Tk 1,000</td>
-                  <td>Bkiash</td>
                   <td>
-                    <button className="bg-warning rounded-md btn-sm">
-                      Pending
+                    <button className="bg-primary btn rounded-md btn-sm">
+                      Click Now
                     </button>
+                  </td>
+                  <td>1 Hour 12min</td>
+                  <td>645MB</td>
+                  <td>
+                    <button className="btn btn-error btn-sm">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -125,4 +123,4 @@ function UserPayment() {
   );
 }
 
-export default UserPayment;
+export default ARecordClass;

@@ -8,7 +8,7 @@ import { MdOutlineAssignment } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 import profileimg from "../../Utility/img/profile.png";
 
-function DashBoard() {
+function ADashboard() {
   const idCopy = (id) => {
     navigator.clipboard.writeText(id);
   };
@@ -122,4 +122,4 @@ function DashBoard() {
   );
 }
 
-export default DashBoard;
+export default ADashboard;
