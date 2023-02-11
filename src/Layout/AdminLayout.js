@@ -1,5 +1,7 @@
 import React from "react";
 import { BsCreditCardFill, BsLayoutSidebarInset } from "react-icons/bs";
+import { FaUserCog } from "react-icons/fa";
+import { MdLightMode, MdNightlight } from "react-icons/md";
 import {
   RiDownloadCloudLine,
   RiFeedbackFill,
@@ -46,15 +48,15 @@ function AdminLayout() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/user/userprofile">
-                <RiSettings4Fill size={16} />
-                Account Setting
+              <NavLink to="/admin/usercontrol">
+                <FaUserCog size={16} />
+                User Control
               </NavLink>
             </li>
             <li>
-              <NavLink to="/user/usercourse">
+              <NavLink to="/admin/managecourse">
                 <SiGoogleclassroom size={16} />
-                All Course
+                Manage Course
               </NavLink>
             </li>
             <li>
@@ -64,16 +66,10 @@ function AdminLayout() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/admin/usercontrol">
-                <RiFeedbackFill size={16} />
-                User Control
+              <NavLink to="/admin/adminprofile">
+                <RiSettings4Fill size={16} />
+                Account Setting
               </NavLink>
-            </li>
-            <li>
-              <button
-                data-toggle-theme="dark,light"
-                data-act-class="ACTIVECLASS"
-              ></button>
             </li>
           </ul>
         </div>

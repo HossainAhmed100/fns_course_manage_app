@@ -38,42 +38,56 @@ function ARecordClass() {
               )}
             </div>
             <div className="flex flex-col w-full">
+              <label>Class Date</label>
+              <input
+                {...register("classdate", { required: true })}
+                type="date"
+                placeholder="Enter Video Duration"
+                className="input input-bordered w-full max-w-md"
+              />
+              {errors.classdate?.type === "required" && (
+                <p role="alert" className="text-red-500">
+                  Plz select Class Date
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col w-full">
               <label>Dowwnlaod Link</label>
               <input
-                {...register("trnxid", { required: true })}
+                {...register("classlink", { required: true })}
                 type="text"
                 placeholder="Enter Video Downlaod Link"
                 className="input input-bordered w-full max-md"
               />
-              {errors.trnxid?.type === "required" && (
+              {errors.classlink?.type === "required" && (
                 <p role="alert" className="text-red-500">
                   Plz Type Video Downlaod Link
                 </p>
               )}
             </div>
             <div className="flex flex-col w-full">
-              <label>Video File Size</label>
+              <label>Video File Size = Example : 2GB 100MB</label>
               <input
-                {...register("amount", { required: true })}
-                type="number"
+                {...register("classsize", { required: true })}
+                type="text"
                 placeholder="Enter Video File Size"
                 className="input input-bordered w-full max-w-md"
               />
-              {errors.trnxid?.type === "required" && (
+              {errors.classsize?.type === "required" && (
                 <p role="alert" className="text-red-500">
                   Type Your Video File Size
                 </p>
               )}
             </div>
             <div className="flex flex-col w-full">
-              <label>Video Duration</label>
+              <label>Video Duration = Example : 2Hour 30Min</label>
               <input
-                {...register("amount", { required: true })}
+                {...register("classduration", { required: true })}
                 type="text"
                 placeholder="Enter Video Duration"
                 className="input input-bordered w-full max-w-md"
               />
-              {errors.trnxid?.type === "required" && (
+              {errors.classduration?.type === "required" && (
                 <p role="alert" className="text-red-500">
                   Type Your Video Duration
                 </p>
@@ -96,6 +110,7 @@ function ARecordClass() {
                   <th>Downlaod Link</th>
                   <th>Video Duration</th>
                   <th>File Size</th>
+                  <th>Class Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -110,6 +125,7 @@ function ARecordClass() {
                   </td>
                   <td>1 Hour 12min</td>
                   <td>645MB</td>
+                  <td>10/Feb/2023</td>
                   <td>
                     <button className="btn btn-error btn-sm">Delete</button>
                   </td>

@@ -19,6 +19,8 @@ import ARecordClass from "../../Pages/Admin/ARecordClass";
 import RecordedClass from "../../Pages/User/RecordedClass";
 import AUserFeedback from "../../Pages/Admin/AUserFeedback";
 import ATaskandAssignment from "../../Pages/Admin/ATaskandAssignment";
+import AdminAccount from "../../Pages/Admin/AdminAccount";
+import Coursemanage from "../../Pages/Admin/Coursemanage";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +98,14 @@ const router = createBrowserRouter([
       {
         path: "/admin/adminpayment",
         element: <APayment />,
+      },
+      {
+        path: "/admin/adminprofile",
+        element: <AdminAccount />,
+      },
+      {
+        path: "/admin/managecourse",
+        element: <Coursemanage />,
       },
       {
         path: "/admin/usercontrol",
