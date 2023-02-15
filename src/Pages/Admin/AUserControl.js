@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { VscCopy } from "react-icons/vsc";
 import axios from "../../axios";
 import { IoClose } from "react-icons/io5";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import profileimg from "../../Utility/img/profile.png";
 import { MdCreate } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import AdminUserTable from "../../Components/AdminUserTable";
+import LodingAnimation from "../../Components/LodingAnimation";
 
 function AUserControl() {
   const [classMissewd, setClassNissed] = useState(false);
@@ -19,14 +19,21 @@ function AUserControl() {
   const onSubmit = (data) => {
     console.log(data);
   };
-  const { data: allUser = [] } = useQuery({
+  const { data: allUser = [], isLoading } = useQuery({
     queryKey: ["alluser"],
     queryFn: async () => {
       const data = await axios.get("alluser");
-      return data;
+      return data.data;
     },
   });
-  console.log(allUser);
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
+  const handleUserRole = (user) => {
+    console.log(user._id);
+  };
+
   return (
     <div className="p-10">
       <div className="space-y-5">
@@ -84,7 +91,7 @@ function AUserControl() {
                   <th>Account info</th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Role
                       </option>
                       <option value={"user"}>User</option>
@@ -93,7 +100,7 @@ function AUserControl() {
                   </th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled defaultValue="" selected>
+                      <option disabled defaultValue>
                         Course
                       </option>
                       <option value={"Course 1"}>Web Design</option>
@@ -102,7 +109,7 @@ function AUserControl() {
                   </th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Account Status
                       </option>
                       <option value={"user"}>Active</option>
@@ -128,7 +135,15 @@ function AUserControl() {
                   <th></th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                {allUser.map((user) => (
+                  <AdminUserTable
+                    key={user._id}
+                    user={user}
+                    handleUserRole={handleUserRole}
+                  />
+                ))}
+              </tbody>
               <tfoot>
                 <tr>
                   <th></th>

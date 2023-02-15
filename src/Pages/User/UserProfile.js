@@ -69,7 +69,7 @@ function UserProfile() {
               alt=""
             />
             <h1>
-              Rule : <span className="text-xl font-semibold">{"User"}</span>
+              Role : <span className="text-xl font-semibold">{"User"}</span>
             </h1>
             <h1 className="flex gap-2 items-center">
               ID : <span className="text-xl font-semibold">{"1613212"}</span>

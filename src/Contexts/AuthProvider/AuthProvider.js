@@ -34,28 +34,9 @@ function AuthProvider({ children }) {
     return await signOut();
   };
 
-  // Loud User Account info From Server
-  const LoadUserInfo = async (user) => {
-    const { data: serveruser = [] } = useQuery({
-      queryKey: ["laoduser", user],
-      queryFn: async () => {
-        const data = await axios.get(`laoduser?email=${user?.email}`);
-        return data;
-      },
-    });
-    return serveruser;
-  };
-
   // Update User Account Info
-  const updateUserinfo = async (name, phone, age, address) => {
-    await updateProfile(auth.currentUser, { displayName: name })
-      .then(() => {
-        axios
-          .put(`userUpdate?email=${user?.email}`, { name, phone, age, address })
-          .then((res) => console.log(res.data))
-          .then((error) => console.log(error));
-      })
-      .catch((error) => console.log("Then Error", error));
+  const updateUserinfo = async (name) => {
+    await updateProfile(auth.currentUser, { displayName: name });
   };
 
   useEffect(() => {

@@ -2,11 +2,11 @@ import React from "react";
 import { VscCopy } from "react-icons/vsc";
 import profileimg from "../Utility/img/profile.png";
 
-function AdminUserTable({ user }) {
-  const { name } = user;
+function AdminUserTable({ user, index, handleUserRole }) {
+  const { name, role, accountstatus } = user;
   return (
     <tr>
-      <th>1</th>
+      <th>{index}</th>
       <td>
         <div className="flex items-center space-x-3">
           <div className="avatar">
@@ -30,7 +30,7 @@ function AdminUserTable({ user }) {
         </div>
       </td>
       <td>
-        <button className="btn btn-ghost btn-sm">USER</button>
+        <button className="btn btn-ghost btn-sm">{role && role}</button>
       </td>
       <td>
         Web Development Course
@@ -38,7 +38,11 @@ function AdminUserTable({ user }) {
         <span className="badge badge-ghost badge-sm">and 1more</span>
       </td>
       <td>
-        <button className="btn btn-error btn-xs">Suspend</button>
+        {accountstatus ? (
+          <button className="btn btn-success btn-xs">Active</button>
+        ) : (
+          <button className="btn btn-error btn-xs">Suspend</button>
+        )}
       </td>
       <td>18 Class</td>
       <td>60 %</td>
@@ -46,7 +50,12 @@ function AdminUserTable({ user }) {
       <td>
         <div className="flex items-center gap-2">
           <button className="btn btn-warning btn-xs">Warning</button>
-          <button className="btn btn-success btn-xs">Active</button>
+          <button
+            onClick={() => handleUserRole(user)}
+            className="btn btn-success btn-xs"
+          >
+            Active
+          </button>
         </div>
       </td>
     </tr>

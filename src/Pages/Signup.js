@@ -22,7 +22,7 @@ function Signup() {
   const onSubmit = (data) => {
     const name = data.username;
     const email = data.email;
-    const rule = "User";
+    const role = "User";
     const age = 18;
     const accountstatus = true;
     const id = "1613212";
@@ -97,7 +97,7 @@ function Signup() {
               .post("alluser", {
                 email,
                 name,
-                rule,
+                role,
                 userClass,
                 id,
                 accountstatus,

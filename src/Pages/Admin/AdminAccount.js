@@ -9,6 +9,9 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
+import axios from "../../axios";
+import LodingAnimation from "../../Components/LodingAnimation";
 
 function AdminAccount() {
   const navigate = useNavigate();
@@ -20,17 +23,48 @@ function AdminAccount() {
     formState: { errors },
   } = useForm();
 
-  //New User Registration
+  // Load User
+  const {
+    data: adminAccount = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["singleuser"],
+    queryFn: async () => {
+      const email = user?.email;
+      const data = await axios.post("singleuser", { email });
+      return data.data;
+    },
+  });
+
+  //Update User info
   const onSubmit = (data) => {
-    console.log(user);
     const name = data.name;
     const phone = data.phone;
     const age = data.age;
     const address = data.address;
-    updateUserinfo(name, phone, age, address);
+    const id = adminAccount._id;
+    updateUserinfo(name)
+      .then(async () => {
+        await axios
+          .put(`userUpdate/${id}`, { name, phone, age, address })
+          .then((res) => {
+            if (res.data.acknowledged) {
+              setEditForm(false);
+              toast.success("Profile Update Succeded");
+              refetch();
+            }
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log("User Update Error", error));
   };
 
-  //User Logout
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
+  //Handle User Logout
   const userLogOutHandle = async () => {
     Swal.fire({
       title: "Are you sure?",
@@ -62,37 +96,44 @@ function AdminAccount() {
               alt=""
             />
             <h1>
-              Rule : <span className="text-xl font-semibold">{"Admin"}</span>
+              Role :{" "}
+              <span className="text-xl font-semibold">
+                {adminAccount?.role}
+              </span>
             </h1>
             <h1 className="flex gap-2 items-center">
-              ID : <span className="text-xl font-semibold">{"1613212"}</span>
+              ID :{" "}
+              <span className="text-xl font-semibold">{adminAccount?.id}</span>
               <VscCopy />
             </h1>
             <h1>
-              Age : <span className="text-xl font-semibold">{"19year"}</span>
+              Age :{" "}
+              <span className="text-xl font-semibold">
+                {adminAccount?.age}year
+              </span>
             </h1>
             <h1>
               Phone :{" "}
               <span className="text-xl font-semibold">
-                {user?.phoneNumber && user?.phoneNumber}
+                {adminAccount?.phone}
               </span>
             </h1>
             <h1>
               Name :{" "}
               <span className="text-xl font-semibold">
-                {user?.displayName && user?.displayName}
+                {adminAccount?.name}
               </span>
             </h1>
             <h1>
               Email :{" "}
               <span className="text-xl font-semibold">
-                {user?.email && user?.email}
+                {adminAccount?.email}
               </span>
             </h1>
             <h1>
               Address :{" "}
               <span className="text-xl font-semibold">
-                {"Dhaka, bangladesh"}
+                {adminAccount?.address}
               </span>
             </h1>
             <h1 className="flex flex-row items-center gap-4 justify-between">
@@ -127,9 +168,10 @@ function AdminAccount() {
                 <h1 className="p-2 flex item-center justify-between">
                   <label htmlFor=""> Age :</label>
                   <input
+                    {...register("age")}
                     type="date"
                     className="input ml-3 input-bordered w-full max-w-xs"
-                    defaultValue={"Hossain"}
+                    defaultValue={adminAccount?.age}
                   />
                 </h1>
                 <h1 className="p-2 flex item-center justify-between">
@@ -138,7 +180,7 @@ function AdminAccount() {
                     {...register("phone")}
                     type="number"
                     className="input ml-3 input-bordered w-full max-w-xs"
-                    defaultValue={"Hossain"}
+                    defaultValue={adminAccount?.phone}
                   />
                 </h1>
                 <h1 className="p-2 flex item-center justify-between">
@@ -147,15 +189,16 @@ function AdminAccount() {
                     {...register("name")}
                     type="text"
                     className="input ml-3 input-bordered w-full max-w-xs"
-                    defaultValue={"Hossain"}
+                    defaultValue={adminAccount?.name}
                   />
                 </h1>
                 <h1 className="p-2 flex item-center justify-between">
                   <label htmlFor=""> Address :</label>
                   <input
+                    {...register("address")}
                     type="text"
                     className="input ml-3 input-bordered w-full max-w-xs"
-                    defaultValue={"Hossain"}
+                    defaultValue={adminAccount?.address}
                   />
                 </h1>
                 <h1 className="flex flex-row items-center justify-between">

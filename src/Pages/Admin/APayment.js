@@ -25,7 +25,7 @@ function APayment() {
                   <th>User</th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Course
                       </option>
                       <option value={"user"}>Web Development</option>
@@ -36,7 +36,7 @@ function APayment() {
                   <th>Paid Amount</th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Month
                       </option>
                       <option value={"Junary"}>Junary</option>
@@ -50,7 +50,7 @@ function APayment() {
                   </th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Payment Method
                       </option>
                       <option value={"user"}>Bikash</option>
@@ -61,7 +61,7 @@ function APayment() {
                   </th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue>
                         Action
                       </option>
                       <option value={"user"}>Approve </option>
