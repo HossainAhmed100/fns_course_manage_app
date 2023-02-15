@@ -44,7 +44,7 @@ function AdminLayout() {
             <li>
               <NavLink to="/admin/adminpayment">
                 <BsCreditCardFill size={16} />
-                Payment
+                User Payment
               </NavLink>
             </li>
             <li>

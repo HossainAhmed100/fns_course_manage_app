@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 function UserProfile() {
   const navigate = useNavigate();
+  const [userAge, setUserAge] = useState("");
   const { updateUserinfo, user, userSignOut } = useContext(AuthContext);
   const [editForm, setEditForm] = useState(false);
   const {
@@ -22,12 +23,18 @@ function UserProfile() {
 
   //New User Registration
   const onSubmit = (data) => {
-    console.log(user);
+    console.log("Age : ", userAge);
+    console.log(data);
     const name = data.name;
     const phone = data.phone;
     const age = data.age;
     const address = data.address;
     updateUserinfo(name, phone, age, address);
+    const birthTime = new Date(age).getTime();
+    const now = Date.now();
+    const ageInMillis = now - birthTime;
+    const ageInYears = Math.floor(ageInMillis / (365.25 * 24 * 60 * 60 * 1000));
+    setUserAge(ageInYears);
   };
 
   //User Logout
@@ -127,6 +134,7 @@ function UserProfile() {
                 <h1 className="p-2 flex item-center justify-between">
                   <label htmlFor=""> Age :</label>
                   <input
+                    {...register("age")}
                     type="date"
                     className="input ml-3 input-bordered w-full max-w-xs"
                     defaultValue={"Hossain"}
@@ -153,6 +161,7 @@ function UserProfile() {
                 <h1 className="p-2 flex item-center justify-between">
                   <label htmlFor=""> Address :</label>
                   <input
+                    {...register("address")}
                     type="text"
                     className="input ml-3 input-bordered w-full max-w-xs"
                     defaultValue={"Hossain"}

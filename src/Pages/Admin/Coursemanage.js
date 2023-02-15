@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TbCloudUpload } from "react-icons/tb";
-import { MdClose, MdCreate } from "react-icons/md";
+import { MdCreate } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 
 function Coursemanage() {
   const [createCourse, setCreateCourse] = useState(false);
@@ -26,6 +27,17 @@ function Coursemanage() {
         )}
         {createCourse && (
           <div className="bg-white rounded-3xl p-8 max-w-2xl custom-border custom-shadow">
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-semibold text-center">
+                Create A New Course
+              </h1>
+              <button
+                onClick={() => setCreateCourse(!createCourse)}
+                className="btn btn-square btn-ghost"
+              >
+                <IoClose className="h-6 w-6" />
+              </button>
+            </div>
             <form
               encType="multipart/form-data"
               onSubmit={handleSubmit(onSubmit)}
@@ -166,12 +178,6 @@ function Coursemanage() {
                 className="btn mt-6 btn-primary"
               />
             </form>
-            <button
-              className="btn btn-primary w-full mt-3 flec items-center gap-2"
-              onClick={() => setCreateCourse(!createCourse)}
-            >
-              <MdClose size={20} /> Cancel
-            </button>
           </div>
         )}
         <div className="bg-white rounded-3xl p-8 custom-border custom-shadow">
