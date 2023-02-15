@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { VscCopy } from "react-icons/vsc";
+import axios from "../../axios";
+import { IoClose } from "react-icons/io5";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import profileimg from "../../Utility/img/profile.png";
+import { MdCreate } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
 
 function AUserControl() {
   const [classMissewd, setClassNissed] = useState(false);
+  const [makeAdmin, setMakeAdmin] = useState(false);
   const {
     register,
     formState: { errors },
@@ -14,82 +19,62 @@ function AUserControl() {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const { data: allUser = [] } = useQuery({
+    queryKey: ["alluser"],
+    queryFn: async () => {
+      const data = await axios.get("alluser");
+      return data;
+    },
+  });
+  console.log(allUser);
   return (
     <div className="p-10">
       <div className="space-y-5">
-        <div className="bg-white rounded-3xl p-8 custom-border max-w-md  custom-shadow">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 flex flex-col"
+        {!makeAdmin && (
+          <button
+            className="btn btn-primary flec items-center gap-2"
+            onClick={() => setMakeAdmin(!makeAdmin)}
           >
-            <div className="flex flex-col w-full">
-              <label>Select Course</label>
-              <select
-                {...register("course", { required: true })}
-                className="select select-bordered w-full max-w-md"
+            <MdCreate size={20} /> Maka A Admin
+          </button>
+        )}
+        {makeAdmin && (
+          <div className="bg-white rounded-3xl p-8 custom-border max-w-md  custom-shadow">
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-semibold text-center">Make Admin</h1>
+              <button
+                onClick={() => setMakeAdmin(!makeAdmin)}
+                className="btn btn-square btn-ghost"
               >
-                <option value={"Complete Web Development with React.js"}>
-                  Complete Web Development with React.js
-                </option>
-                <option value={"Digital Marketing With Freelancer Nasim"}>
-                  Digital Marketing With Freelancer Nasim
-                </option>
-              </select>
-              {errors.course?.type === "required" && (
-                <p role="alert" className="text-red-500">
-                  Plz Select a Course
-                </p>
-              )}
+                <IoClose className="h-6 w-6" />
+              </button>
             </div>
-            <div className="flex flex-col w-full">
-              <label>Dowwnlaod Link</label>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-4 flex flex-col"
+            >
+              <div className="flex flex-col w-full">
+                <label>User ID</label>
+                <input
+                  {...register("makeadmin", { required: true })}
+                  type="text"
+                  placeholder="Enter User ID"
+                  className="input input-bordered w-full max-w-md"
+                />
+                {errors.makeadmin?.type === "required" && (
+                  <p role="alert" className="text-red-500">
+                    Type User id
+                  </p>
+                )}
+              </div>
               <input
-                {...register("trnxid", { required: true })}
-                type="text"
-                placeholder="Enter Video Downlaod Link"
-                className="input input-bordered w-full max-md"
+                type="submit"
+                value="Make Admin"
+                className="btn mt-6 btn-primary"
               />
-              {errors.trnxid?.type === "required" && (
-                <p role="alert" className="text-red-500">
-                  Plz Type Video Downlaod Link
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col w-full">
-              <label>Video File Size</label>
-              <input
-                {...register("amount", { required: true })}
-                type="number"
-                placeholder="Enter Video File Size"
-                className="input input-bordered w-full max-w-md"
-              />
-              {errors.trnxid?.type === "required" && (
-                <p role="alert" className="text-red-500">
-                  Type Your Video File Size
-                </p>
-              )}
-            </div>
-            <div className="flex flex-col w-full">
-              <label>Video Duration</label>
-              <input
-                {...register("amount", { required: true })}
-                type="text"
-                placeholder="Enter Video Duration"
-                className="input input-bordered w-full max-w-md"
-              />
-              {errors.trnxid?.type === "required" && (
-                <p role="alert" className="text-red-500">
-                  Type Your Video Duration
-                </p>
-              )}
-            </div>
-            <input
-              type="submit"
-              value="SUBMIT"
-              className="btn mt-6 btn-primary"
-            />
-          </form>
-        </div>
+            </form>
+          </div>
+        )}
         <div className="bg-white rounded-3xl p-8 custom-border custom-shadow">
           <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -108,7 +93,7 @@ function AUserControl() {
                   </th>
                   <th>
                     <select className="select select-bordered select-sm w-full max-w-xs">
-                      <option disabled selected>
+                      <option disabled defaultValue="" selected>
                         Course
                       </option>
                       <option value={"Course 1"}>Web Design</option>
@@ -116,19 +101,26 @@ function AUserControl() {
                     </select>
                   </th>
                   <th>
-                    <div
+                    <select className="select select-bordered select-sm w-full max-w-xs">
+                      <option disabled selected>
+                        Account Status
+                      </option>
+                      <option value={"user"}>Active</option>
+                      <option value={"admin"}>Suspend</option>
+                    </select>
+                  </th>
+                  <th>
+                    <button
                       onClick={() => setClassNissed(!classMissewd)}
-                      className="text-sm flex items-center opacity-50"
+                      className="btn btn-ghost flex gap-2 items-center btn-sm"
                     >
-                      <button className="btn text-gray-800 btn-ghost flex gap-2 items-center btn-sm">
-                        Join Class
-                        {classMissewd ? (
-                          <TiArrowSortedUp />
-                        ) : (
-                          <TiArrowSortedDown />
-                        )}
-                      </button>
-                    </div>
+                      Join Class
+                      {classMissewd ? (
+                        <TiArrowSortedUp />
+                      ) : (
+                        <TiArrowSortedDown />
+                      )}
+                    </button>
                   </th>
                   <th>Average Marks</th>
                   <th>UnPaid Amount</th>
@@ -136,54 +128,7 @@ function AUserControl() {
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img src={profileimg} alt="Avatar" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Hossain Ahmed</div>
-                        <div className="text-sm flex items-center opacity-50">
-                          ID :
-                          <button
-                            className="btn btn-ghost flex gap-2 items-center btn-sm tooltip tooltip-right"
-                            data-tip="Click to Copy"
-                          >
-                            B4S6F5B
-                            <VscCopy />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <button className="btn btn-ghost btn-sm">USER</button>
-                  </td>
-                  <td>
-                    Web Development Course
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      and 1more
-                    </span>
-                  </td>
-                  <td>18 Class</td>
-                  <td>60 %</td>
-                  <td>Tk 5,000</td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <button className="btn btn-warning btn-xs">
-                        Warning
-                      </button>
-                      <button className="btn btn-error btn-xs">Suspend</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody></tbody>
               <tfoot>
                 <tr>
                   <th></th>
