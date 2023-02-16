@@ -8,8 +8,6 @@ import {
 } from "firebase/auth";
 import app from "../../firebase.init";
 import { useSignOut } from "react-firebase-hooks/auth";
-import { useQuery } from "@tanstack/react-query";
-import axios from "../../axios";
 export const AuthContext = createContext();
 
 const auth = getAuth(app);

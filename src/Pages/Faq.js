@@ -1,8 +1,10 @@
 import React from "react";
+import HeadTitle from "../hooks/HeadTitle";
 
 function Faq() {
   return (
     <div className="py-20">
+      <HeadTitle title={"FNS - Terms and Privacy Policy"} />
       <div className="container mx-auto">
         <div>
           <div>

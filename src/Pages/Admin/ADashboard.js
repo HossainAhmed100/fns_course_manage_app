@@ -10,6 +10,7 @@ import profileimg from "../../Utility/img/profile.png";
 import { useQuery } from "@tanstack/react-query";
 import axios from "../../axios";
 import LodingAnimation from "../../Components/LodingAnimation";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function ADashboard() {
   const idCopy = (id) => {
@@ -30,6 +31,7 @@ function ADashboard() {
 
   return (
     <div className="p-10">
+      <HeadTitle title={"Admin Dashboard"} />
       <div className="grid lg:grid-cols-4 gap-4">
         <div className="space-y-5 col-span-3">
           <div className="bg-white p-8 custom-border custom-shadow rounded-3xl">

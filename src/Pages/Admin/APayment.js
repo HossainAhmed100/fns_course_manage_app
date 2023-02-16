@@ -8,6 +8,7 @@ import NajminIslam from "../../Utility/img/NajminIslam.jpg";
 import MohammadSharifUddin from "../../Utility/img/MohammadSharifUddin.jpg";
 import NazmulHossain from "../../Utility/img/NazmulHossain.jpg";
 import mdalamin from "../../Utility/img/mdalamin.jpg";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function APayment() {
   const copyText = (text) => {
@@ -15,6 +16,7 @@ function APayment() {
   };
   return (
     <div className="p-10">
+      <HeadTitle title={"Admin - Payment Manage"} />
       <div>
         <div className="bg-white rounded-3xl p-8 custom-border custom-shadow">
           <div className="overflow-x-auto w-full">

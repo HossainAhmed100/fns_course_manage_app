@@ -12,16 +12,13 @@ import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import axios from "../../axios";
 import LodingAnimation from "../../Components/LodingAnimation";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function AdminAccount() {
   const navigate = useNavigate();
   const { updateUserinfo, user, userSignOut } = useContext(AuthContext);
   const [editForm, setEditForm] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   // Load User
   const {
@@ -87,6 +84,7 @@ function AdminAccount() {
 
   return (
     <div className="p-10 grid lg:grid-cols-3 gap-5">
+      <HeadTitle title={"Admin Account Setting"} />
       <div className="max-w-md">
         <div className="bg-white p-8 rounded-3xl custom-shadow custom-border">
           <div className="leading-10 divide-y text-start text-xl">

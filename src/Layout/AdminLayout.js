@@ -1,7 +1,6 @@
 import React from "react";
 import { BsCreditCardFill, BsLayoutSidebarInset } from "react-icons/bs";
 import { FaUserCog } from "react-icons/fa";
-import { MdLightMode, MdNightlight } from "react-icons/md";
 import {
   RiDownloadCloudLine,
   RiFeedbackFill,

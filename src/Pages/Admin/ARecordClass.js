@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import { MdCreate } from "react-icons/md";
 import LodingAnimation from "../../Components/LodingAnimation";
 import ARCLassTable from "../../Components/ARCLassTable";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function ARecordClass() {
   const [addRecordClass, setAddRecordClass] = useState(false);
@@ -65,6 +66,7 @@ function ARecordClass() {
 
   return (
     <div className="p-10">
+      <HeadTitle title={"Admin - Recorded Class Manage"} />
       <div className="space-y-5">
         {!addRecordClass && (
           <button

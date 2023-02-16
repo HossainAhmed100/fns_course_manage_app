@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
+import HeadTitle from "../hooks/HeadTitle";
 function Login() {
   const [viewPass, setViewPass] = useState(false);
   const { userLogin } = useContext(AuthContext);
@@ -41,6 +42,7 @@ function Login() {
 
   return (
     <div>
+      <HeadTitle title={"FNS - Login"} />
       <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex justify-center self-center  z-10">
           <div className="p-12 mt-20 bg-white mx-auto rounded-2xl w-100 border">

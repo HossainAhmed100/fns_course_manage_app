@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { TbCloudUpload } from "react-icons/tb";
 import { MdCreate } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import axios from "../../axios";
 import { useQuery } from "@tanstack/react-query";
 import LodingAnimation from "../../Components/LodingAnimation";
 import AdminCourseCard from "../../Components/AdminCourseCard";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function Coursemanage() {
   const [createCourse, setCreateCourse] = useState(false);
@@ -50,6 +50,7 @@ function Coursemanage() {
 
   return (
     <div className="p-10">
+      <HeadTitle title={"Admin User Course Manage"} />
       <div className="space-y-5">
         {!createCourse && (
           <button

@@ -9,17 +9,14 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function UserProfile() {
   const navigate = useNavigate();
   const [userAge, setUserAge] = useState("");
   const { updateUserinfo, user, userSignOut } = useContext(AuthContext);
   const [editForm, setEditForm] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   //New User Registration
   const onSubmit = (data) => {
@@ -60,6 +57,7 @@ function UserProfile() {
 
   return (
     <div className="p-10 grid lg:grid-cols-3 gap-5">
+      <HeadTitle title={"User Profile"} />
       <div className="max-w-md">
         <div className="bg-white p-8 rounded-3xl custom-shadow custom-border">
           <div className="leading-10 divide-y text-start text-xl">

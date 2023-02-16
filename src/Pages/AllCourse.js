@@ -1,6 +1,4 @@
 import React from "react";
-import profileimg from "../Utility/img/profile.png";
-import thumbnail from "../Utility/img/course.jpg";
 import { useQuery } from "@tanstack/react-query";
 import axios from "../axios";
 import LodingAnimation from "../Components/LodingAnimation";

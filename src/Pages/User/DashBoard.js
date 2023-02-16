@@ -7,6 +7,7 @@ import { AiFillNotification } from "react-icons/ai";
 import { MdOutlineAssignment } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 import profileimg from "../../Utility/img/profile.png";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function DashBoard() {
   const idCopy = (id) => {
@@ -14,6 +15,7 @@ function DashBoard() {
   };
   return (
     <div className="p-10">
+      <HeadTitle title={"User Dashboard"} />
       <div className="grid lg:grid-cols-4 gap-4">
         <div className="space-y-5 col-span-3">
           <div className="bg-white p-8 custom-border custom-shadow rounded-3xl">

@@ -9,6 +9,7 @@ import {
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
 import axios from "../axios";
 import { toast } from "react-toastify";
+import HeadTitle from "../hooks/HeadTitle";
 function Signup() {
   const [viewPass, setViewPass] = useState(true);
   const [signUpError, setSignUpError] = useState("");
@@ -133,6 +134,7 @@ function Signup() {
 
   return (
     <div>
+      <HeadTitle title={"FNS - Signup"} />
       <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex justify-center self-center  z-10">
           <div className="p-12 mt-20 bg-white mx-auto rounded-2xl  border">

@@ -7,6 +7,7 @@ import { MdCreate } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import AdminUserTable from "../../Components/AdminUserTable";
 import LodingAnimation from "../../Components/LodingAnimation";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function AUserControl() {
   const [classMissewd, setClassNissed] = useState(false);
@@ -49,6 +50,7 @@ function AUserControl() {
 
   return (
     <div className="p-10">
+      <HeadTitle title={"Admin - User Control"} />
       <div className="space-y-5">
         {!makeAdmin && (
           <button

@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function UserPayment() {
   const {
@@ -12,6 +13,7 @@ function UserPayment() {
   };
   return (
     <div className="p-10">
+      <HeadTitle title={"User Payment"} />
       <div className="space-y-5">
         <div className="bg-white rounded-3xl p-8 custom-border max-w-md  custom-shadow">
           <form

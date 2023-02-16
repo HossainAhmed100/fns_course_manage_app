@@ -3,6 +3,7 @@ import axios from "../../axios";
 import React from "react";
 import LodingAnimation from "../../Components/LodingAnimation";
 import UserRecordClassTable from "../../Components/UserRecordClassTable";
+import HeadTitle from "../../hooks/HeadTitle";
 
 function RecordedClass() {
   const { data: allCourse = [], isLoading } = useQuery({
@@ -17,14 +18,19 @@ function RecordedClass() {
   }
   return (
     <div className="p-10">
+      <HeadTitle title={"User Recorded Class"} />
       <div>
         <div className="bg-white p-8 custom-border custom-shadow rounded-3xl">
           <label className="text-lg font-medium text-gray-800">
             Select Your Course
           </label>
           <select className="select mt-1 text-lg select-bordered w-full">
-            <option>Complete Web Development with React.js</option>
-            <option>Digital Marketing With Freelancer Nasim</option>
+            {allCourse &&
+              allCourse.map((course) => (
+                <option value={course._id} key={course._id}>
+                  {course.c_Title}
+                </option>
+              ))}
           </select>
         </div>
         <div className="divider"></div>
@@ -35,11 +41,10 @@ function RecordedClass() {
                 <tr>
                   <th></th>
                   <th>Course</th>
-                  <th>Downlaod Link</th>
                   <th>Video Duration</th>
                   <th>File Size</th>
                   <th>Class Date</th>
-                  <th>Action</th>
+                  <th>Downlaod Link</th>
                 </tr>
               </thead>
               <tbody>
