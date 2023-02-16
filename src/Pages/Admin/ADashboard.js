@@ -7,11 +7,27 @@ import { AiFillNotification } from "react-icons/ai";
 import { MdOutlineAssignment } from "react-icons/md";
 import { IoCopy } from "react-icons/io5";
 import profileimg from "../../Utility/img/profile.png";
+import { useQuery } from "@tanstack/react-query";
+import axios from "../../axios";
+import LodingAnimation from "../../Components/LodingAnimation";
 
 function ADashboard() {
   const idCopy = (id) => {
     navigator.clipboard.writeText(id);
   };
+  // Fetch Existing Course From Server
+  const { data: allCourse = [], isLoading } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
   return (
     <div className="p-10">
       <div className="grid lg:grid-cols-4 gap-4">
@@ -21,8 +37,10 @@ function ADashboard() {
               Select Your Course
             </label>
             <select className="select mt-1 text-lg select-bordered w-full">
-              <option>Complete Web Development with React.js</option>
-              <option>Digital Marketing With Freelancer Nasim</option>
+              {allCourse &&
+                allCourse.map((course) => (
+                  <option key={course._id}>{course.c_Title}</option>
+                ))}
             </select>
           </div>
           <div className="grid lg:grid-cols-6 gap-6">

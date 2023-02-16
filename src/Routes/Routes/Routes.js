@@ -89,7 +89,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin/dashboard",
-        element: <DashBoard />,
+        element: <ADashboard />,
       },
       {
         path: "/admin/recordclass",

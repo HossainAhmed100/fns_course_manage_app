@@ -19,7 +19,11 @@ function AUserControl() {
   const onSubmit = (data) => {
     console.log(data);
   };
-  const { data: allUser = [], isLoading } = useQuery({
+  const {
+    data: allUser = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["alluser"],
     queryFn: async () => {
       const data = await axios.get("alluser");
@@ -30,8 +34,17 @@ function AUserControl() {
     return <LodingAnimation />;
   }
 
-  const handleUserRole = (user) => {
-    console.log(user._id);
+  const handleUserRole = async (user) => {
+    const status = user.accountstatus;
+    let accountstatus = status ? false : true;
+    await axios
+      .put(`handleaccountstatus/${user._id}`, { accountstatus })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          refetch();
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -151,6 +164,7 @@ function AUserControl() {
                   <th>Role</th>
                   <th>Course</th>
                   <th>Join Class</th>
+                  <th>Account Status</th>
                   <th>Average Marks</th>
                   <th>UnPaid Amount</th>
                   <th>Action</th>

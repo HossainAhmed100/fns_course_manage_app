@@ -3,17 +3,51 @@ import { useForm } from "react-hook-form";
 import { TbCloudUpload } from "react-icons/tb";
 import { MdCreate } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import axios from "../../axios";
+import { useQuery } from "@tanstack/react-query";
+import LodingAnimation from "../../Components/LodingAnimation";
+import AdminCourseCard from "../../Components/AdminCourseCard";
 
 function Coursemanage() {
   const [createCourse, setCreateCourse] = useState(false);
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  // Fetch Existing Course From Server
+  const {
+    data: allCourse = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+
+  // Create A New Course
+  const onSubmit = async (data) => {
+    await axios
+      .post("addnewcourse", { data })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          refetch();
+          reset();
+        }
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
   };
+
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
   return (
     <div className="p-10">
       <div className="space-y-5">
@@ -47,7 +81,7 @@ function Coursemanage() {
               <div className="flex flex-col">
                 <label>Course Title *</label>
                 <input
-                  {...register("ctitle", { required: true })}
+                  {...register("c_Title", { required: true })}
                   type="text"
                   placeholder="Enter Course Title"
                   className="input input-bordered w-full"
@@ -61,7 +95,7 @@ function Coursemanage() {
               <div className="flex flex-col">
                 <label>Course Duration * Example : 6Month-7Month</label>
                 <input
-                  {...register("cduration", { required: true })}
+                  {...register("c_Duration", { required: true })}
                   type="text"
                   placeholder="Enter Course Duration"
                   className="input input-bordered w-full"
@@ -76,7 +110,7 @@ function Coursemanage() {
                 <div className="flex flex-col">
                   <label>Course Class Start Date *</label>
                   <input
-                    {...register("cstartdate", { required: true })}
+                    {...register("c_StartDate", { required: true })}
                     type="date"
                     placeholder="Enter Video Duration"
                     className="input input-bordered w-full max-w-md"
@@ -90,7 +124,7 @@ function Coursemanage() {
                 <div className="flex flex-col">
                   <label>Course Enrollmetn End Date *</label>
                   <input
-                    {...register("courseenrollenddate", { required: true })}
+                    {...register("c_EnrollEndDate", { required: true })}
                     type="date"
                     className="input input-bordered w-full max-w-md"
                   />
@@ -105,7 +139,7 @@ function Coursemanage() {
                 <div className="flex flex-col">
                   <label>Course Student Quantity *</label>
                   <input
-                    {...register("cstdentquantity", { required: true })}
+                    {...register("c_StdentQuantity", { required: true })}
                     type="number"
                     className="input input-bordered w-full max-w-md"
                   />
@@ -118,7 +152,7 @@ function Coursemanage() {
                 <div className="flex flex-col">
                   <label>Course Batch Non * Example : Batch 6</label>
                   <input
-                    {...register("coursebatchnum", { required: true })}
+                    {...register("c_BatchNum", { required: true })}
                     type="text"
                     className="input input-bordered w-full max-w-md"
                   />
@@ -132,7 +166,7 @@ function Coursemanage() {
               <div className="flex flex-col w-full">
                 <label>Course Description *</label>
                 <textarea
-                  {...register("courseDescription", { required: true })}
+                  {...register("c_Description", { required: true })}
                   className="textarea textarea-bordered"
                   placeholder="Write Somthing"
                 ></textarea>
@@ -142,10 +176,10 @@ function Coursemanage() {
                   </p>
                 )}
               </div>
-              <div>
+              {/* <div>
                 <div className="flex items-center justify-center w-full">
                   <label
-                    for="dropzone-file"
+                    htmlFor="dropzone-file"
                     className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -171,7 +205,7 @@ function Coursemanage() {
                     Course Thumbnail is Required
                   </p>
                 )}
-              </div>
+              </div> */}
               <input
                 type="submit"
                 value="SUBMIT"
@@ -186,7 +220,12 @@ function Coursemanage() {
               All Course
             </h1>
             <div className="divider"></div>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-1 gap-10"></div>
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-1 gap-10">
+              {allCourse &&
+                allCourse.map((course) => (
+                  <AdminCourseCard key={course._id} course={course} />
+                ))}
+            </div>
           </div>
         </div>
       </div>

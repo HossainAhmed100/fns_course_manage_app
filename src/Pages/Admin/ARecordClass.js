@@ -1,18 +1,68 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "../../axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 import { MdCreate } from "react-icons/md";
+import LodingAnimation from "../../Components/LodingAnimation";
+import ARCLassTable from "../../Components/ARCLassTable";
 
 function ARecordClass() {
   const [addRecordClass, setAddRecordClass] = useState(false);
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  // Fetch Existing Course From Server
+  const {
+    data: allCourse = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
+  // Add New Record Classs
+  const onSubmit = async (data) => {
+    const cousre = data.course.split(",");
+    const cousreId = cousre[1];
+    const courseName = cousre[0];
+    const classdate = data.classdate;
+    const classlink = data.classlink;
+    const classsize = data.classsize;
+    const classduration = data.classduration;
+    // {data.classdate, data.classlink, data.classsize, data.classduration}
+    await axios
+      .put(`recordedclasss/${cousreId}`, {
+        cousreId,
+        courseName,
+        classdate,
+        classlink,
+        classsize,
+        classduration,
+      })
+      .then((res) => {
+        reset();
+        refetch();
+      })
+      .catch((error) => console.log(error));
   };
+
+  const classDeleteHandle = (classes) => {
+    console.log(classes);
+  };
+
   return (
     <div className="p-10">
       <div className="space-y-5">
@@ -47,12 +97,15 @@ function ARecordClass() {
                   {...register("course", { required: true })}
                   className="select select-bordered w-full max-w-md"
                 >
-                  <option value={"Complete Web Development with React.js"}>
-                    Complete Web Development with React.js
-                  </option>
-                  <option value={"Digital Marketing With Freelancer Nasim"}>
-                    Digital Marketing With Freelancer Nasim
-                  </option>
+                  {allCourse &&
+                    allCourse.map((course) => (
+                      <option
+                        value={[course.c_Title, course._id]}
+                        key={course._id}
+                      >
+                        {course.c_Title}
+                      </option>
+                    ))}
                 </select>
                 {errors.course?.type === "required" && (
                   <p role="alert" className="text-red-500">
@@ -139,21 +192,16 @@ function ARecordClass() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>Complete Web Development with React.js</td>
-                  <td>
-                    <button className="bg-primary btn rounded-md btn-sm">
-                      Click Now
-                    </button>
-                  </td>
-                  <td>1 Hour 12min</td>
-                  <td>645MB</td>
-                  <td>10/Feb/2023</td>
-                  <td>
-                    <button className="btn btn-error btn-sm">Delete</button>
-                  </td>
-                </tr>
+                {allCourse &&
+                  allCourse.map((rclass) =>
+                    rclass.recordClass.map((recordClass, index) => (
+                      <ARCLassTable
+                        key={index}
+                        rclass={recordClass}
+                        rcdelete={classDeleteHandle}
+                      />
+                    ))
+                  )}
               </tbody>
             </table>
           </div>

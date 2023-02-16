@@ -50,12 +50,21 @@ function AdminUserTable({ user, index, handleUserRole }) {
       <td>
         <div className="flex items-center gap-2">
           <button className="btn btn-warning btn-xs">Warning</button>
-          <button
-            onClick={() => handleUserRole(user)}
-            className="btn btn-success btn-xs"
-          >
-            Active
-          </button>
+          {user.accountstatus ? (
+            <button
+              onClick={() => handleUserRole(user)}
+              className="btn btn-error btn-xs"
+            >
+              Suspend
+            </button>
+          ) : (
+            <button
+              onClick={() => handleUserRole(user)}
+              className="btn btn-success btn-xs"
+            >
+              Active
+            </button>
+          )}
         </div>
       </td>
     </tr>
