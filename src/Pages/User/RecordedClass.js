@@ -1,6 +1,20 @@
+import { useQuery } from "@tanstack/react-query";
+import axios from "../../axios";
 import React from "react";
+import LodingAnimation from "../../Components/LodingAnimation";
+import UserRecordClassTable from "../../Components/UserRecordClassTable";
 
 function RecordedClass() {
+  const { data: allCourse = [], isLoading } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
   return (
     <div className="p-10">
       <div>
@@ -14,182 +28,29 @@ function RecordedClass() {
           </select>
         </div>
         <div className="divider"></div>
-        <div className="grid lg:grid-cols-4 gap-4">
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 01 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 02 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 03 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 04 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 05 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 06 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 07 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
-          </div>
-          <div className="card card-compact w-full bg-white custom-shadow custom-border">
-            <div className="card-body">
-              <h2 className="card-title">
-                Html5 & Css3 Website Design Part 08 by Freelancer Nasim
-              </h2>
-              <div className="divider"></div>
-              <p className="text-xl">
-                Time :{" "}
-                <span className="text-base font-semibold">2hour 31min</span>
-              </p>
-              <p className="text-xl">
-                Size : <span className="text-base font-semibold">2GB 31MB</span>
-              </p>
-              <div className="card-actions justify-end">
-                <p className="text-xl">
-                  Date :{" "}
-                  <span className="text-base font-semibold">10/02/2023</span>
-                </p>
-                <button className="btn btn-primary">Downlaod</button>
-              </div>
-            </div>
+        <div className="bg-white rounded-3xl p-8 custom-border custom-shadow">
+          <div className="overflow-x-auto">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Course</th>
+                  <th>Downlaod Link</th>
+                  <th>Video Duration</th>
+                  <th>File Size</th>
+                  <th>Class Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allCourse &&
+                  allCourse.map((rclass) =>
+                    rclass.recordClass.map((recordClass, index) => (
+                      <UserRecordClassTable key={index} rclass={recordClass} />
+                    ))
+                  )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
