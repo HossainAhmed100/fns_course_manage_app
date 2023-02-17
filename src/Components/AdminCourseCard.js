@@ -1,8 +1,7 @@
 import React from "react";
-import { TbEye, TbReportAnalytics } from "react-icons/tb";
 import thumbnail from "../Utility/img/course.jpg";
 
-function AdminCourseCard({ course }) {
+function AdminCourseCard({ course, children }) {
   // c_Title, c_Duration, c_StartDate, c_EnrollEndDate, c_StdentQuantity, c_BatchNum, c_Description
   const {
     c_Title,
@@ -32,13 +31,7 @@ function AdminCourseCard({ course }) {
         <span>Student Limit : {c_StdentQuantity && c_StdentQuantity}</span>
         <span>{"40"}+ Enrolled Alredy</span>
         <div className="card-actions flex-row mt-4 items-center justify-around">
-          <button className="btn btn-primary flex items-center gap-2 justify-center">
-            <TbEye size={20} />
-            See Details
-          </button>
-          <button className="btn btn-primary flex items-center gap-2 justify-center">
-            <TbReportAnalytics size={20} /> Analytics
-          </button>
+          {children}
         </div>
       </div>
     </div>

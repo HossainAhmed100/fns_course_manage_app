@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdCreate } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
+import { TbEye, TbReportAnalytics } from "react-icons/tb";
 import axios from "../../axios";
 import { useQuery } from "@tanstack/react-query";
 import LodingAnimation from "../../Components/LodingAnimation";
@@ -224,7 +225,19 @@ function Coursemanage() {
             <div className="grid lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-1 gap-10">
               {allCourse &&
                 allCourse.map((course) => (
-                  <AdminCourseCard key={course._id} course={course} />
+                  <AdminCourseCard key={course._id} course={course}>
+                    {
+                      <>
+                        <button className="btn btn-primary flex items-center gap-2 justify-center">
+                          <TbEye size={20} />
+                          See Details
+                        </button>
+                        <button className="btn btn-primary flex items-center gap-2 justify-center">
+                          <TbReportAnalytics size={20} /> Analytics
+                        </button>
+                      </>
+                    }
+                  </AdminCourseCard>
                 ))}
             </div>
           </div>

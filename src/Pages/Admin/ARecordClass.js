@@ -10,6 +10,7 @@ import HeadTitle from "../../hooks/HeadTitle";
 
 function ARecordClass() {
   const [addRecordClass, setAddRecordClass] = useState(false);
+  // const [selectedCourse, setSelectedCourse] = useState();
   const {
     register,
     reset,
@@ -60,8 +61,26 @@ function ARecordClass() {
       .catch((error) => console.log(error));
   };
 
-  const classDeleteHandle = (classes) => {
-    console.log(classes);
+  // Delete Recorded Class
+  const classDeleteHandle = async (classes) => {
+    const classdate = classes.classdate;
+    console.log(classdate);
+    await axios
+      .patch(`recordedclasss/${classes.cousreId}`, { classdate })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+        }
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log("Record Class Delete Error ", error);
+      });
+  };
+
+  const selectedCourseHandle = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
   };
 
   return (
@@ -179,6 +198,22 @@ function ARecordClass() {
             </form>
           </div>
         )}
+        <div className="bg-white p-8 custom-border custom-shadow rounded-3xl">
+          <label className="text-lg font-medium text-gray-800">
+            Select Your Course
+          </label>
+          <select
+            onChange={selectedCourseHandle}
+            className="select mt-1 text-lg select-bordered w-full"
+          >
+            {allCourse &&
+              allCourse.map((course) => (
+                <option value={course._id} key={course._id}>
+                  {course.c_Title}
+                </option>
+              ))}
+          </select>
+        </div>
         <div className="bg-white rounded-3xl p-8 custom-border custom-shadow">
           <div className="overflow-x-auto">
             <table className="table w-full">
@@ -199,6 +234,7 @@ function ARecordClass() {
                     rclass.recordClass.map((recordClass, index) => (
                       <ARCLassTable
                         key={index}
+                        index={index + 1}
                         rclass={recordClass}
                         rcdelete={classDeleteHandle}
                       />
