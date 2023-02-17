@@ -28,16 +28,16 @@ function AllCourse() {
       <div className="grid lg:grid-cols-2 xl:grid-cols-4 md:grid-cols-1 gap-10">
         {allCourse &&
           allCourse.map((course) => (
-            <AdminCourseCard course={course}>
+            <AdminCourseCard key={course._id} course={course}>
               <Link
-                to={"/user/usercourse/coursedetails"}
+                to={`/user/usercourse/coursedetails/${course._id}`}
                 className="btn btn-primary flex items-center gap-2 justify-center"
               >
                 <TbEye size={20} />
                 See Details
               </Link>
               <Link
-                to={"/user/usercourse/coursepurchase"}
+                to={`/user/usercourse/coursepurchase/${course._id}`}
                 className="btn btn-primary flex items-center gap-2 justify-center"
               >
                 <IoCard size={20} /> By Now

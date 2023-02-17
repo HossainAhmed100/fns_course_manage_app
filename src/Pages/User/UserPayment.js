@@ -1,6 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import HeadTitle from "../../hooks/HeadTitle";
+import axios from "../../axios";
+import LodingAnimation from "../../Components/LodingAnimation";
+import { useQuery } from "@tanstack/react-query";
 
 function UserPayment() {
   const {
@@ -11,6 +14,17 @@ function UserPayment() {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const { data: allCourse = [], isLoading } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
   return (
     <div className="p-10">
       <HeadTitle title={"User Payment"} />
@@ -26,12 +40,12 @@ function UserPayment() {
                 {...register("course", { required: true })}
                 className="select select-bordered w-full max-w-md"
               >
-                <option value={"Complete Web Development with React.js"}>
-                  Complete Web Development with React.js
-                </option>
-                <option value={"Digital Marketing With Freelancer Nasim"}>
-                  Digital Marketing With Freelancer Nasim
-                </option>
+                {allCourse &&
+                  allCourse.map((course) => (
+                    <option value={course._id} key={course._id}>
+                      {course.c_Title}
+                    </option>
+                  ))}
               </select>
               {errors.course?.type === "required" && (
                 <p role="alert" className="text-red-500">

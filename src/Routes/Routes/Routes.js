@@ -21,6 +21,8 @@ import AUserFeedback from "../../Pages/Admin/AUserFeedback";
 import ATaskandAssignment from "../../Pages/Admin/ATaskandAssignment";
 import AdminAccount from "../../Pages/Admin/AdminAccount";
 import Coursemanage from "../../Pages/Admin/Coursemanage";
+import CourseDetails from "../../Components/CourseDetails";
+import CoursePurchase from "../../Components/CoursePurchase";
 
 const router = createBrowserRouter([
   {
@@ -78,8 +80,12 @@ const router = createBrowserRouter([
         element: <UserCourse />,
       },
       {
-        path: "/user/usercourse/coursedetails",
-        element: <UserCourse />,
+        path: "/user/usercourse/coursedetails/:id",
+        element: <CourseDetails />,
+      },
+      {
+        path: "/user/usercourse/coursepurchase/:id",
+        element: <CoursePurchase />,
       },
     ],
   },

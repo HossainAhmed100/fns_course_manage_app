@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { FiEdit3 } from "react-icons/fi";
 import { FaPaperPlane } from "react-icons/fa";
 import HeadTitle from "../../hooks/HeadTitle";
+import axios from "../../axios";
+import LodingAnimation from "../../Components/LodingAnimation";
+import { useQuery } from "@tanstack/react-query";
 
 function UserFeedback() {
   const {
@@ -13,6 +16,16 @@ function UserFeedback() {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const { data: allCourse = [], isLoading } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const res = await axios.get("allCourse");
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
 
   return (
     <div className="p-10">
@@ -26,12 +39,12 @@ function UserFeedback() {
                 {...register("course", { required: true })}
                 className="select select-bordered w-full max-w-md"
               >
-                <option value={"Complete Web Development with React.js"}>
-                  Complete Web Development with React.js
-                </option>
-                <option value={"Digital Marketing With Freelancer Nasim"}>
-                  Digital Marketing With Freelancer Nasim
-                </option>
+                {allCourse &&
+                  allCourse.map((course) => (
+                    <option value={course._id} key={course._id}>
+                      {course.c_Title}
+                    </option>
+                  ))}
               </select>
               {errors.course?.type === "required" && (
                 <p role="alert">Plz Select a Course</p>
