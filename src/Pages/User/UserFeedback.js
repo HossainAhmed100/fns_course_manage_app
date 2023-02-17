@@ -55,7 +55,7 @@ function UserFeedback() {
               <textarea
                 {...register("feedbackinput", { required: true })}
                 className="textarea textarea-bordered"
-                placeholder="Bio"
+                placeholder="Write Somthing..."
               ></textarea>
               {errors.feedbackinput?.type === "required" && (
                 <p role="alert">Plz write something</p>

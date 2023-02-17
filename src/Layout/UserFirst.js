@@ -40,15 +40,15 @@ function UserFirst() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/user/userprofile">
-                <RiSettings4Fill size={16} />
-                Account Setting
-              </NavLink>
-            </li>
-            <li>
               <NavLink to="/user/usercourse">
                 <SiGoogleclassroom size={16} />
                 All Course
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/user/userprofile">
+                <RiSettings4Fill size={16} />
+                Account Setting
               </NavLink>
             </li>
             <li>
