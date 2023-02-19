@@ -1,12 +1,50 @@
 import React from "react";
-import HeadTitle from "../../hooks/HeadTitle";
-import AllCourse from "../AllCourse";
+import { useQuery } from "@tanstack/react-query";
+import axios from "../../axios";
+import { TbEye } from "react-icons/tb";
+import { IoCard } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import AdminCourseCard from "../../Components/AdminCourseCard";
+import LodingAnimation from "../../Components/LodingAnimation";
 
 function UserCourse() {
+  const { data: allCourse = [], isLoading } = useQuery({
+    queryKey: ["allCourse"],
+    queryFn: async () => {
+      const data = await axios.get("allCourse");
+      return data.data;
+    },
+  });
+  if (isLoading) {
+    return <LodingAnimation />;
+  }
+
   return (
-    <div>
-      <HeadTitle title={"User Course"} />
-      <AllCourse />
+    <div className="container mx-auto">
+      <h1 className="text-xl text-center m-6 lg:text-5xl font-semibold">
+        All Course
+      </h1>
+      <div className="divider"></div>
+      <div className="grid lg:grid-cols-2 xl:grid-cols-4 md:grid-cols-1 gap-10">
+        {allCourse &&
+          allCourse.map((course) => (
+            <AdminCourseCard key={course._id} course={course}>
+              <Link
+                to={`/user/usercourse/coursedetails/${course._id}`}
+                className="btn btn-primary flex items-center gap-2 justify-center"
+              >
+                <TbEye size={20} />
+                See Details
+              </Link>
+              <Link
+                to={`/user/usercourse/coursepurchase/${course._id}`}
+                className="btn btn-primary flex items-center gap-2 justify-center"
+              >
+                <IoCard size={20} /> By Now
+              </Link>
+            </AdminCourseCard>
+          ))}
+      </div>
     </div>
   );
 }
